@@ -2,11 +2,15 @@
 
 /* Global Styles */
 :root {
-  --primary-color: #dc3545;
+  /* --primary-color: #dc3545; */
+  --primary-color: #007bff; 
   --dark-color: #333333;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --secondary-color: #f8f9fa;
+  --info-color:  #20c997;
+  --warning-color: #ffc107;
 }
 
 * {
@@ -274,6 +278,11 @@ img {
 .badge-danger,
 .alert-danger {
   background: var(--danger-color);
+  color: #fff;
+}
+
+.btn-info {
+  background: var(--info-color);
   color: #fff;
 }
 
