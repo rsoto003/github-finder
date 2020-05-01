@@ -8,7 +8,8 @@ class Search extends Component {
     static propTypes = {
         searchUsers: PropTypes.func.isRequired,
         clearUsers: PropTypes.func.isRequired,
-        users: PropTypes.array.isRequired
+        users: PropTypes.array.isRequired,
+        setAlert: PropTypes.func.isRequired
     }
 
     handleSearch = event => {
@@ -20,8 +21,12 @@ class Search extends Component {
 
     searchSubmit = event => {
         event.preventDefault();
-        this.props.searchUsers(this.state.text);
-        this.setState({text: ''})
+        if(this.state.text === ''){
+            this.props.setAlert('Please enter something', 'danger')
+        } else {
+            this.props.searchUsers(this.state.text);
+            this.setState({text: ''})
+        }
     };
 
     render(){
@@ -30,7 +35,7 @@ class Search extends Component {
         return (
             <form className="form" onSubmit={this.searchSubmit}>
                 <input type="text" name="text" placeholder="Search Users..." value={this.state.text} onChange={this.handleSearch} autoComplete="off"/>
-                <input type="submit" value="Search" className={this.state.text !== '' ? "btn btn-primary btn-block" : "btn btn-secondary btn-block"} disabled={this.state.text === ''}/>
+                <input type="submit" value="Search" className={this.state.text !== '' ? "btn btn-primary btn-block" : "btn btn-secondary btn-block"}/>
                 {deleteBtn}
             </form>
         );
