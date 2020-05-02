@@ -181,6 +181,10 @@ img {
   margin: 3rem 0;
 }
 
+.right-align {
+  float: right
+}
+
 /* Grid */
 .grid-2 {
   display: grid;

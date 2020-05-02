@@ -37,7 +37,11 @@ class App extends Component {
   }
   setAlert = (msg, type) => {
     this.setState({ alert: { msg, type} })
-    setTimeout( () => this.setState({ alert: null}), 3000)
+    setTimeout( () => this.setState({ alert: null}), 5000)
+  }
+
+  closeAlert = () => {
+    this.setState({ alert: null })
   }
 
   
@@ -46,7 +50,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <div className="container">
-        <Alert alert={this.state.alert} />
+        <Alert alert={this.state.alert} closeAlert={this.closeAlert}/>
         <Search 
           searchUsers={this.searchUsers} 
           clearUsers={this.clearUsers} 
