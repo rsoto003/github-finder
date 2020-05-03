@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   //get single users
-  getUser = async (username) => {
+  getUser = async username => {
     this.setState({ loading: true })
     const res = await axios.get(
       `https://api.github.com/users/${username}?client_id=${
@@ -83,7 +83,7 @@ class App extends Component {
             )} />
             <Route exact path="/about" component={About}/>
             <Route exact path="/user/:login" render={props => (
-              <User {...props} getUser={this.getUser} user={user} loading={loading}/>
+              <User {...props   } getUser={this.getUser} user={user} loading={loading}/>
             )}/>
           </Switch>
 
