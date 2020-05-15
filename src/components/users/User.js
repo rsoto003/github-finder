@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 
 class User extends Component {
     componentDidMount(){
-        this.props.getUser(this.props.match.params.login)
+        this.props.getUser(this.props.match.params.login);
+        this.props.getUserRepos(this.props.match.params.login);
     }
     
     static propTypes = {
         loading: PropTypes.bool.isRequired,
         user: PropTypes.object.isRequired,
-        getUser: PropTypes.func.isRequired
+        getUser: PropTypes.func.isRequired,
+        getUserRepos: PropTypes.func.isRequired
     }
 
     render(){
@@ -44,7 +46,7 @@ class User extends Component {
         {hireable ? <i className="fas fa-check text-success"></i> : <i className="fas fa-times-circle text-danger"></i>}
         <div className="card grid-2">
             <div className="all-center">
-                <img src={avatar_url} className="round-img" style={{width: '150px'}}/>
+                <img src={avatar_url} alt="" className="round-img" style={{width: '150px'}}/>
                 <h1>{name}</h1>
                 <p>{location}</p>
             </div>
