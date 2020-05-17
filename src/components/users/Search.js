@@ -44,6 +44,6 @@ Search.propTypes = {
     clearUsers: PropTypes.func.isRequired,
     users: PropTypes.array.isRequired,
     setAlert: PropTypes.func.isRequired
-}
+   }
 
 export default Search;
