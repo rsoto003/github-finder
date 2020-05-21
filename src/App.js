@@ -7,6 +7,7 @@ import Alert from './components/layout/Alert';
 import About from './components/pages/About';
 import User from './components/users/User';
 import axios from 'axios';
+import GithubState from './context/github/GithubState';
 import './App.css';
 
 
@@ -15,7 +16,7 @@ const App = () => {
   const [ repos, setRepos ] = useState([]);
   const [ user, setUser ] = useState({});
   const [ loading, setLoading ] = useState(false);
-  const [ alert, setAlertMsg ] = useState(null);
+  const [ alert, setAlert ] = useState(null);
 
   const searchUsers = async text => {
     setLoading(true);
@@ -61,9 +62,9 @@ const App = () => {
     setLoading(false);
   }
 
-  const setAlert = (msg, type) => {
-    setAlertMsg({ msg, type});
-    setTimeout( () => setAlertMsg(null), 5000);
+  const showAlert = (msg, type) => {
+    setAlert({ msg, type});
+    setTimeout( () => setAlert(null), 5000);
   }
 
   const closeAlert = () => {
@@ -72,40 +73,41 @@ const App = () => {
 
   
     return (
-      <Router>
-         <div className="App">
-          <Navbar />
-          <div className="container">
-          <Alert alert={alert} closeAlert={closeAlert}/>
-          <Switch>
-            <Route exact path="/" render={props => ( 
-              <Fragment>
-                <Search 
-                  searchUsers={searchUsers} 
-                  clearUsers={clearUsers} 
-                  users={users} 
-                  setAlert={setAlert}
-                />
-                <Users users={users} loading={loading}/>
-              </Fragment>
-            )} />
-            <Route exact path="/about" component={About}/>
-            <Route exact path="/user/:login" render={props => (
-              <User 
-                {...props   } 
-                getUser={getUser} 
-                user={user} 
-                loading={loading}                   
-                getUserRepos={getUserRepos}
-                repos={repos}        
-                />
-            )}/>
-          </Switch>
+      <GithubState>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <div className="container">
+            <Alert alert={alert} closeAlert={closeAlert}/>
+            <Switch>
+              <Route exact path="/" render={props => ( 
+                <Fragment>
+                  <Search 
+                    searchUsers={searchUsers} 
+                    clearUsers={clearUsers} 
+                    users={users} 
+                    setAlert={showAlert}
+                  />
+                  <Users users={users} loading={loading}/>
+                </Fragment>
+              )} />
+              <Route exact path="/about" component={About}/>
+              <Route exact path="/user/:login" render={props => (
+                <User 
+                  {...props   } 
+                  getUser={getUser} 
+                  user={user} 
+                  loading={loading}                   
+                  getUserRepos={getUserRepos}
+                  repos={repos}        
+                  />
+              )}/>
+            </Switch>
 
+            </div>
           </div>
-        </div>
-      </Router>
-     
+        </Router>
+      </GithubState>
     );
 }
 
